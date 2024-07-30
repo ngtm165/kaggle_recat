@@ -35,7 +35,7 @@ class GIN(nn.Module):
         self,
         node_in_feats,
         edge_in_feats,
-        depth=6,
+        depth=3,
         node_hid_feats=300,
         readout_feats=1024,
         dr=0.1,
@@ -305,7 +305,7 @@ class reactionMPNN(nn.Module):
                 weight=0.6
 
 
-                reaction_feat=reaction_feat*weight+ reagents*(1-0.2-weight) + 0.2*reaction_mean
+                reaction_feat=reaction_feat*weight+ reagents*(1-weight) 
 
                 reaction_feat_full=torch.cat((reaction_feat_full, reaction_feat))
                 reactants_out=torch.cat((reactants_out, reactants))
