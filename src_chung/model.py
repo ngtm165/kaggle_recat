@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 # from util import MC_dropout
-#from src_chung.self_attention import EncoderLayer
-#from src_chung.nt_xent import NTXentLoss
+from src_chung.self_attention import EncoderLayer
+from src_chung.nt_xent import NTXentLoss
 
 
 class linear_head(nn.Module):
@@ -328,7 +328,7 @@ def training(
 ):
     train_size = train_loader.dataset.__len__()
     batch_size = train_loader.batch_size
-    nt_xent_criterion = NTXentLoss(cuda, batch_size)
+    #nt_xent_criterion = NTXentLoss(cuda, batch_size)
     
 
     try:
