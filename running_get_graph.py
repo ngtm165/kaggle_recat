@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-data=pd.read_csv('./data_chung/schneider50k.tsv',sep='\t',index_col=0)
+data=pd.read_csv('./data_chung/50k_unbalance.csv',sep='\t',index_col=0)
 
 def new_smi_react(smi):
     rxnmapper = RXNMapper()
@@ -50,12 +50,12 @@ data=data.dropna(subset=['new_rxn'])
 
 
 # Transfer from rxn_class to class
-with open('./data_chung/rxnclass2id.json','r') as f:
-    rxnclass2id=json.load(f)
-data['y']=[rxnclass2id[c] for c in data['rxn_class']]
+#with open('./data_chung/rxnclass2id.json','r') as f:
+#    rxnclass2id=json.load(f)
+#data['y']=[rxnclass2id[c] for c in data['rxn_class']]
 
 data_pretrain=data[data.split=='train']
-data_train,data_valid=train_test_split(data_pretrain,test_size=0.2,stratify=data_pretrain['y'].values)
+data_train,data_valid=train_test_split(data_pretrain,test_size=0.1,stratify=data_pretrain['y'].values)
 
 def to_categorical(y, num_classes):
     """ 1-hot encodes a tensor """
