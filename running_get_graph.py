@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-data=pd.read_csv('./data_chung/50k_unbalance.csv',sep='\t',index_col=0)
+data=pd.read_csv('./data_chung/50k_unbalance.csv',index_col=0)
 
 def new_smi_react(smi):
     rxnmapper = RXNMapper()
