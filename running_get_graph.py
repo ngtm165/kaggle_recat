@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-data=pd.read_csv('/kaggle/working/sample/data_chung/schneider50k.csv',index_col=0)
+data=pd.read_csv('/kaggle/working/sample/data_chung/50k_unbalance.csv',index_col=0)
 
 # def new_smi_react(smi):
 #     rxnmapper = RXNMapper()
@@ -62,21 +62,21 @@ def to_categorical(y, num_classes):
     return np.eye(num_classes, dtype='uint8')[y]
 
 
-# rsmi_list=data['new_rxn'].values
-# rmol_max_cnt = np.max([smi.split(">>")[0].count(".") + 1 for smi in rsmi_list])
-# pmol_max_cnt = np.max([smi.split(">>")[1].count(".") + 1 for smi in rsmi_list])
+rsmi_list=data['rxn'].values
+rmol_max_cnt = np.max([smi.split(">>")[0].count(".") + 1 for smi in rsmi_list])
+pmol_max_cnt = np.max([smi.split(">>")[1].count(".") + 1 for smi in rsmi_list])
 
 # reagent=data['reagent_separated'].values
 # reagent_max_cnt=np.max([smi.count('.')+1 for smi in reagent])
 
 
 #get_data_train
-# rsmi_list_train=data_train['new_rxn'].values
+rsmi_list_train=data_train['rxn'].values
 # reagent_train=data_train['reagent_separated'].values
 y_list_train=data_train['y'].values
 y_list_train=to_categorical(y_list_train, 50)
 filename_train='./data_chung/data_train_ms.npz'
-get_graph_data(rsmi_list_train,reagent_train,y_list_train,filename_train,rmol_max_cnt,pmol_max_cnt,reagent_max_cnt)
+get_graph_data(rsmi_list_train,y_list_train,filename_train,rmol_max_cnt,pmol_max_cnt)
 
 #get_data_valid
 rsmi_list_valid=data_valid['rxn'].values
@@ -84,7 +84,7 @@ rsmi_list_valid=data_valid['rxn'].values
 y_list_valid=data_valid['y'].values
 y_list_valid=to_categorical(y_list_valid, 50)
 filename_valid='./data_chung/data_valid_ms.npz'
-get_graph_data(rsmi_list_valid,reagent_valid,y_list_valid,filename_valid,rmol_max_cnt,pmol_max_cnt,reagent_max_cnt)
+get_graph_data(rsmi_list_valid,y_list_valid,filename_valid,rmol_max_cnt,pmol_max_cnt)
 
 #get_data_test
 data_test=data[data['split']=='test']
@@ -93,4 +93,4 @@ rsmi_list_test=data_test['rxn'].values
 y_list_test=data_test['y'].values
 y_list_test=to_categorical(y_list_test, 50)
 filename_test='./data_chung/data_test_ms.npz'
-get_graph_data(rsmi_list_test,reagent_test,y_list_test,filename_test,rmol_max_cnt,pmol_max_cnt,reagent_max_cnt)
+get_graph_data(rsmi_list_test,y_list_test,filename_test,rmol_max_cnt,pmol_max_cnt)
