@@ -16,21 +16,21 @@ def mol_dict():
     }
 
 
-def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt,rgmol_max_cnt):
+def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt):
     rmol_max_cnt = rmol_max_cnt
     pmol_max_cnt = pmol_max_cnt
-    rgmol_max_cnt=rgmol_max_cnt
+    # rgmol_max_cnt=rgmol_max_cnt
 
     rmol_dict = [mol_dict() for _ in range(rmol_max_cnt)]
     pmol_dict = [mol_dict() for _ in range(pmol_max_cnt)]
-    rgmol_dict = [mol_dict() for _ in range(rgmol_max_cnt)]   
+    # rgmol_dict = [mol_dict() for _ in range(rgmol_max_cnt)]   
 
     reaction_dict = {"y": [], "rsmi": []}
 
     print("--- generating graph data for %s" % filename)
     print(
-        "--- n_reactions: %d, reactant_max_cnt: %d, product_max_cnt: %d, rgmol_max_cnt: %d"
-        % (len(rsmi_list), rmol_max_cnt, pmol_max_cnt,rgmol_max_cnt)
+        "--- n_reactions: %d, reactant_max_cnt: %d, product_max_cnt: %d"
+        % (len(rsmi_list), rmol_max_cnt, pmol_max_cnt)
     )
 
     for i in range(len(rsmi_list)):
