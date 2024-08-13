@@ -328,7 +328,7 @@ def training(
 ):
     train_size = train_loader.dataset.__len__()
     batch_size = train_loader.batch_size
-    #nt_xent_criterion = NTXentLoss(cuda, batch_size)
+    # nt_xent_criterion = NTXentLoss(cuda, batch_size)
     
 
     try:
