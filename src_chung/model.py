@@ -12,9 +12,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-# from util import MC_dropout
-from src_chung.self_attention import EncoderLayer
-from src_chung.nt_xent import NTXentLoss
+# # from util import MC_dropout
+# from src_chung.self_attention import EncoderLayer
+# from src_chung.nt_xent import NTXentLoss
 
 
 class linear_head(nn.Module):
