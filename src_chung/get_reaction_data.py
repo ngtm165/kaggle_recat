@@ -141,10 +141,10 @@ def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt):
         rmol_dict[j] = dict_list_to_numpy(rmol_dict[j])
     for j in range(pmol_max_cnt):
         pmol_dict[j] = dict_list_to_numpy(pmol_dict[j])
-    for j in range(rgmol_max_cnt):
-        rgmol_dict[j] = dict_list_to_numpy(rgmol_dict[j])
+    # for j in range(rgmol_max_cnt):
+    #     rgmol_dict[j] = dict_list_to_numpy(rgmol_dict[j])
 
     reaction_dict["y"] = np.array(reaction_dict["y"])
 
     # save file
-    np.savez_compressed(filename, rmol=rmol_dict, pmol=pmol_dict,rgmol=rgmol_dict ,reaction=reaction_dict)
+    np.savez_compressed(filename, rmol=rmol_dict, pmol=pmol_dict ,reaction=reaction_dict)
