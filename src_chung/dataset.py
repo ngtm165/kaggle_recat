@@ -178,7 +178,7 @@ class GraphDataset:
 
         label = self.y[idx]
 
-        return *g1, *g2, *rg,label
+        return *g1, *g2, label
 
     def __len__(self):
         return self.y.shape[0]
