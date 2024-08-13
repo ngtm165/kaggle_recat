@@ -283,7 +283,7 @@ class reactionMPNN(nn.Module):
                 reactants=torch.sum(reactants,0).unsqueeze(0)
                 products= torch.sum(products,0).unsqueeze(0)
 
-                =torch.sub(reactants,products)
+                reaction_feat=torch.sub(reactants,products)
 
                 # #reagents
                 # num_node_list_rg=rg_num_nodes[:,i]
