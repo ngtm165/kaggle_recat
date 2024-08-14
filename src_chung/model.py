@@ -217,7 +217,7 @@ class reactionMPNN(nn.Module):
                 reaction_feat=torch.sub(reactants,products)
 
 
-                reaction_feat_full=reaction_feat
+                reaction_feat_full=torch.cat((reaction_feat_full, reaction_feat))
                 reactants_out=torch.cat((reactants_out, reactants))
                 products_out=torch.cat((products_out, products))
         else:
