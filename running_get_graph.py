@@ -74,7 +74,7 @@ pmol_max_cnt = np.max([smi.split(">>")[1].count(".") + 1 for smi in rsmi_list])
 rsmi_list_train=data_train['rxn'].values
 # reagent_train=data_train['reagent_separated'].values
 y_list_train=data_train['y'].values
-y_list_train=to_categorical(y_list_train, 50)
+y_list_train=to_categorical(y_list_train, 10)
 filename_train='/kaggle/working/sample/data_chung/data_train_ms.npz'
 get_graph_data(rsmi_list_train,y_list_train,filename_train,rmol_max_cnt,pmol_max_cnt)
 
@@ -82,7 +82,7 @@ get_graph_data(rsmi_list_train,y_list_train,filename_train,rmol_max_cnt,pmol_max
 rsmi_list_valid=data_valid['rxn'].values
 # reagent_valid=data_valid['reagent_separated'].values
 y_list_valid=data_valid['y'].values
-y_list_valid=to_categorical(y_list_valid, 50)
+y_list_valid=to_categorical(y_list_valid, 10)
 filename_valid='/kaggle/working/sample/data_chung/data_valid_ms.npz'
 get_graph_data(rsmi_list_valid,y_list_valid,filename_valid,rmol_max_cnt,pmol_max_cnt)
 
@@ -91,6 +91,6 @@ data_test=data[data['split']=='test']
 # reagent_test=data_test['reagent_separated'].values
 rsmi_list_test=data_test['rxn'].values
 y_list_test=data_test['y'].values
-y_list_test=to_categorical(y_list_test, 50)
+y_list_test=to_categorical(y_list_test, 10)
 filename_test='/kaggle/working/sample/data_chung/data_test_ms.npz'
 get_graph_data(rsmi_list_test,y_list_test,filename_test,rmol_max_cnt,pmol_max_cnt)
