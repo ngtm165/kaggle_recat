@@ -17,7 +17,7 @@ from src_chung.util import collate_reaction_graphs
 
 def finetune(args):
 
-    batch_size = 1
+    batch_size = 2
     use_saved = False
     model_path = "/kaggle/working/sample/data_chung/model/finetuned/model.pt"
 
