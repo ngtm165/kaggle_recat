@@ -10,7 +10,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-data=pd.read_csv('/kaggle/working/sample/data_chung/50k_unbalance_1.csv',index_col=0)
+data=pd.read_csv('/kaggle/working/sample/data_chung/schneider50k.csv',index_col=0)
 
 # def new_smi_react(smi):
 #     rxnmapper = RXNMapper()
