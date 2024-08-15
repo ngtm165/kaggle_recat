@@ -444,9 +444,9 @@ def training(
 
             pred = net.predict(r_rep)
             preds.extend(torch.argmax(pred, dim=1).tolist())
-            print('pred: ', pred.shape)
-            print('labels: ', labels.shape)
-            print('label', labels)
+            # print('pred: ', pred.shape)
+            # print('labels: ', labels.shape)
+            # print('label', labels)
             loss= loss_fn(pred, labels)
 
 
