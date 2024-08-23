@@ -16,7 +16,7 @@ def mol_dict():
     }
 
 
-def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt):
+def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt,rgmol_max_cnt): #thêm rgmol_max_cnt
     rmol_max_cnt = rmol_max_cnt
     pmol_max_cnt = pmol_max_cnt
     rgmol_max_cnt = rgmol_max_cnt
@@ -30,7 +30,7 @@ def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt):
     print("--- generating graph data for %s" % filename)
     print(
         "--- n_reactions: %d, reactant_max_cnt: %d, product_max_cnt: %d"
-        % (len(rsmi_list), rmol_max_cnt, pmol_max_cnt)
+        % (len(rsmi_list), rmol_max_cnt, pmol_max_cnt, rgmol_max_cnt)               #thêm rgmol_max_cnt
     )
 
     for i in range(len(rsmi_list)):
@@ -147,4 +147,4 @@ def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt):
     reaction_dict["y"] = np.array(reaction_dict["y"])
 
     # save file
-    np.savez_compressed(filename, rmol=rmol_dict, pmol=pmol_dict, rgmol=rgmol_dict,  reaction=reaction_dict)
+    np.savez_compressed(filename, rmol=rmol_dict, pmol=pmol_dict, rgmol=rgmol_dict,  reaction=reaction_dict)  #thêm rgmol
