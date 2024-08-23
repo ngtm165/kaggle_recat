@@ -16,7 +16,7 @@ def mol_dict():
     }
 
 
-def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt,rgmol_max_cnt): #thêm rgmol_max_cnt
+def get_graph_data(rsmi_list,reagent, y_list, filename,rmol_max_cnt,pmol_max_cnt,rgmol_max_cnt): #thêm rgmol_max_cnt, reagent(sau rsmi_list)
     rmol_max_cnt = rmol_max_cnt
     pmol_max_cnt = pmol_max_cnt
     rgmol_max_cnt = rgmol_max_cnt
@@ -36,7 +36,7 @@ def get_graph_data(rsmi_list, y_list, filename,rmol_max_cnt,pmol_max_cnt,rgmol_m
     for i in range(len(rsmi_list)):
         rsmi = rsmi_list[i].replace("~", "-")
         y = y_list[i]
-        # reagents_smi=reagent[i]
+        reagents_smi=reagent[i]
 
         [reactants_smi, products_smi] = rsmi.split(">>")
 
