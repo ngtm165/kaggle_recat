@@ -204,7 +204,7 @@ class reactionMPNN(nn.Module):
 
                 start_list_p=end_list_p
 
-                # reactants,_=self.rea_attention_pro(reactants, reactants)
+                # reactants,_=self.rea_attention_pro(reactants, reactants)    # ko đụng vào
                 # products,_=self.pro_attention_rea(products,products)
 
                 # reactants_noncross=reactants
@@ -334,13 +334,13 @@ def training(
     try:
         rmol_max_cnt = train_loader.dataset.dataset.rmol_max_cnt
         pmol_max_cnt = train_loader.dataset.dataset.pmol_max_cnt
-        # rgmol_max_cnt = train_loader.dataset.dataset.rgmol_max_cnt
+        rgmol_max_cnt = train_loader.dataset.dataset.rgmol_max_cnt
 
     except:
         rmol_max_cnt = train_loader.dataset.rmol_max_cnt
         pmol_max_cnt = train_loader.dataset.pmol_max_cnt
-        # rgmol_max_cnt = train_loader.dataset.rgmol_max_cnt
-    # print('rmol_max_cnt:', rmol_max_cnt, '\n pmol_max_cnt:', pmol_max_cnt)
+        rgmol_max_cnt = train_loader.dataset.rgmol_max_cnt
+    # print('rmol_max_cnt:', rmol_max_cnt, '\n pmol_max_cnt:', pmol_max_cnt) # ko đụng vào
 
     loss_fn = nn.CrossEntropyLoss()
     n_epochs = 50
@@ -356,7 +356,7 @@ def training(
     weight_sc_list=[]
 
     best_val_loss =1e10
-    # best_loss=1e10
+    # best_loss=1e10                    # ko đụng vào
     # net_contra = net
     # for epoch in range(2):
     #     # training
@@ -426,10 +426,10 @@ def training(
                 b.to(cuda)
                 for b in batchdata[rmol_max_cnt : rmol_max_cnt + pmol_max_cnt]
             ]
-            # inputs_rgmol=[
-            #     b.to(cuda)
-            #     for b in batchdata[rmol_max_cnt + pmol_max_cnt : rmol_max_cnt + pmol_max_cnt + rgmol_max_cnt]
-            # ]
+            inputs_rgmol=[
+                b.to(cuda)
+                for b in batchdata[rmol_max_cnt + pmol_max_cnt : rmol_max_cnt + pmol_max_cnt + rgmol_max_cnt]
+            ]
             print('inputs_pmol_shape: ',len(inputs_pmol))
 
             labels = batchdata[-1]
@@ -438,7 +438,7 @@ def training(
 
             r_rep,_,_= net(inputs_rmol, inputs_pmol)
 
-            # r_rep_contra=F.normalize(r_rep, dim=1)
+            # r_rep_contra=F.normalize(r_rep, dim=1)  # ko đụng vào
             # p_rep_contra=F.normalize(p_rep, dim=1)
             # loss_sc=nt_xent_criterion(r_rep_contra, p_rep_contra)
 
@@ -491,12 +491,12 @@ def training(
             try:
                 rmol_max_cnt = val_loader.dataset.dataset.rmol_max_cnt
                 pmol_max_cnt = val_loader.dataset.dataset.pmol_max_cnt
-                # rgmol_max_cnt = val_loader.dataset.dataset.rgmol_max_cnt
+                rgmol_max_cnt = val_loader.dataset.dataset.rgmol_max_cnt
 
             except:
                 rmol_max_cnt = val_loader.dataset.rmol_max_cnt
                 pmol_max_cnt = val_loader.dataset.pmol_max_cnt
-                # rgmol_max_cnt = val_loader.dataset.rgmol_max_cnt
+                rgmol_max_cnt = val_loader.dataset.rgmol_max_cnt
 
             net.eval()
             val_loss_list=[]
@@ -511,17 +511,17 @@ def training(
                         b.to(cuda)
                         for b in batchdata[rmol_max_cnt : rmol_max_cnt + pmol_max_cnt]
                     ]
-                    # inputs_rgmol=[
-                    #     b.to(cuda)
-                    #     for b in batchdata[rmol_max_cnt + pmol_max_cnt : rmol_max_cnt + pmol_max_cnt + rgmol_max_cnt]
-                    # ]
+                    inputs_rgmol=[
+                        b.to(cuda)
+                        for b in batchdata[rmol_max_cnt + pmol_max_cnt : rmol_max_cnt + pmol_max_cnt + rgmol_max_cnt]
+                    ]
 
                     labels_val = batchdata[-1]
                     val_targets.extend(labels_val.tolist())
                     labels_val = labels_val.to(cuda)
 
 
-                    r_rep,_,_=net(inputs_rmol, inputs_pmol)
+                    r_rep,_,_=net(inputs_rmol, inputs_pmol, inputs_rgmol)   #thêm inputs_rgmol
                     pred_val = net.predict(r_rep)
                     val_preds.extend(torch.argmax(pred_val, dim=1).tolist())   
                     loss=loss_fn(pred_val,labels_val)
@@ -569,12 +569,12 @@ def inference(
     try:
         rmol_max_cnt = test_loader.dataset.dataset.rmol_max_cnt
         pmol_max_cnt = test_loader.dataset.dataset.pmol_max_cnt
-        # rgmol_max_cnt = test_loader.dataset.dataset.rgmol_max_cnt
+        rgmol_max_cnt = test_loader.dataset.dataset.rgmol_max_cnt
 
     except:
         rmol_max_cnt = test_loader.dataset.rmol_max_cnt
         pmol_max_cnt = test_loader.dataset.pmol_max_cnt
-        # rgmol_max_cnt = test_loader.dataset.rgmol_max_cnt
+        rgmol_max_cnt = test_loader.dataset.rgmol_max_cnt
 
     net.eval()
 
@@ -587,11 +587,11 @@ def inference(
                 b.to(cuda)
                 for b in batchdata[rmol_max_cnt : rmol_max_cnt + pmol_max_cnt]
             ]
-            # inputs_rgmol=[
-            #     b.to(cuda)
-            #     for b in batchdata[rmol_max_cnt + pmol_max_cnt : rmol_max_cnt + pmol_max_cnt + rgmol_max_cnt]
-            # ]
-            r_rep,_,_= net(inputs_rmol, inputs_pmol)
+            inputs_rgmol=[
+                b.to(cuda)
+                for b in batchdata[rmol_max_cnt + pmol_max_cnt : rmol_max_cnt + pmol_max_cnt + rgmol_max_cnt]
+            ]
+            r_rep,_,_= net(inputs_rmol, inputs_pmol, inputs_rgmol)  #thêm inputs_rgmol
 
             pred = net.predict(r_rep)
 
