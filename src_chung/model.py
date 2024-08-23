@@ -436,7 +436,7 @@ def training(
             targets.extend(labels.tolist())
             labels = labels.to(cuda)
 
-            r_rep,_,_= net(inputs_rmol, inputs_pmol)
+            r_rep,_,_= net(inputs_rmol, inputs_pmol, inputs_rgmol)   #thêm inputs_rgmol
 
             # r_rep_contra=F.normalize(r_rep, dim=1)  # ko đụng vào
             # p_rep_contra=F.normalize(p_rep, dim=1)
